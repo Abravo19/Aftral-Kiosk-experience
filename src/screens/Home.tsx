@@ -76,7 +76,19 @@ export const Home: React.FC = () => {
       </div>
 
       {/* Featured News Teaser - Bottom Card */}
+      {/* Featured News Teaser - Bottom Card */}
       {featuredNews && (
+        <button
+          onClick={() => navigate(Screen.NEWS)}
+          className="mb-4 w-full bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl p-4 shadow-md active:scale-95 transition-all flex items-center gap-4 text-left group border border-gray-700"
+        >
+          <div className="relative w-16 h-16 shrink-0 rounded-lg overflow-hidden bg-gray-700">
+            {featuredNews.image && <img src={featuredNews.image} className="w-full h-full object-cover opacity-80" alt="" />}
+            <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+              <Megaphone className="text-white" size={24} />
+            </div>
+          </div>
+          <div className="flex-1">
             <span className="text-aftral-red text-xs font-bold uppercase tracking-wider mb-1 block">
               {featuredNews.type === 'PROMOTION' ? 'Offre Spéciale' : 'À la une'}
             </span>
