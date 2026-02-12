@@ -113,25 +113,25 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ onWake }) => {
                         />
                     </div>
                     
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-90"></div>
+                    {/* Gradient Overlay - Top & Bottom */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/90 opacity-90"></div>
 
                     {/* Clock & Date Widget */}
-                    <div className="absolute top-12 right-12 z-30 text-right">
-                        <div className="text-8xl font-bold font-mono tracking-widest drop-shadow-2xl">
+                    <div className="absolute top-8 right-8 z-30 text-right">
+                        <div className="text-7xl font-bold font-mono tracking-widest drop-shadow-2xl">
                             {time.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
                         </div>
-                        <div className="text-3xl text-gray-300 font-light mt-2 uppercase tracking-wide">
+                        <div className="text-2xl text-gray-300 font-light mt-1 uppercase tracking-wide">
                             {time.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
                         </div>
                     </div>
 
                     {/* Content Zone */}
-                    <div className="absolute inset-0 z-20 flex flex-col items-center justify-end pb-32 px-12 text-center">
+                    <div className="absolute inset-x-0 bottom-0 z-20 flex flex-col items-center justify-end pb-40 px-12 text-center">
                         
                         <div className={`transition-all duration-1000 delay-300 transform ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
                             {slide.type === 'PROMOTION' && (
-                                <div className="bg-aftral-red text-white px-6 py-2 rounded-full font-bold uppercase tracking-widest mb-8 inline-flex items-center gap-3 shadow-lg border border-red-400">
+                                <div className="bg-aftral-red text-white px-6 py-2 rounded-full font-bold uppercase tracking-widest mb-6 inline-flex items-center gap-3 shadow-lg border border-red-400">
                                     <Megaphone size={24} /> Offre Spéciale
                                 </div>
                             )}
@@ -142,7 +142,7 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ onWake }) => {
                             )}
                         </div>
                         
-                        <h1 className={`text-6xl font-bold mb-6 drop-shadow-xl leading-tight transition-all duration-1000 delay-500 transform ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                        <h1 className={`text-6xl font-bold mb-4 drop-shadow-xl leading-tight transition-all duration-1000 delay-500 transform ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
                             {slide.title}
                         </h1>
                         <p className={`text-3xl text-gray-200 font-medium max-w-4xl transition-all duration-1000 delay-700 transform ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
