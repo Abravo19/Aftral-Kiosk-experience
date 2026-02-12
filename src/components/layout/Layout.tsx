@@ -59,7 +59,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
         <button
           onClick={() => navigate(Screen.HOME)}
-          className={`flex flex - col items - center justify - center w - 20 h - 24 ${ currentScreen === Screen.HOME ? 'text-aftral-red' : 'text-gray-600' } active: scale - 95 transition - all`}
+          className={`flex flex-col items-center justify-center w-20 h-24 ${ currentScreen === Screen.HOME ? 'text-aftral-red' : 'text-gray-600' } active:scale-95 transition-all`}
         >
           <Home size={32} />
           <span className="text-xs font-bold uppercase mt-1">Accueil</span>
@@ -67,7 +67,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
         <button
           onClick={() => navigate(Screen.CATALOG)}
-          className={`flex flex - col items - center justify - center w - 20 h - 24 ${ currentScreen === Screen.CATALOG ? 'text-aftral-red' : 'text-gray-600' } active: scale - 95 transition - all`}
+          className={`flex flex-col items-center justify-center w-20 h-24 ${ currentScreen === Screen.CATALOG ? 'text-aftral-red' : 'text-gray-600' } active:scale-95 transition-all`}
         >
           <BookOpen size={32} />
           <span className="text-xs font-bold uppercase mt-1">Formation</span>
@@ -75,7 +75,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
         <button
           onClick={() => navigate(Screen.NEWS)}
-          className={`flex flex - col items - center justify - center w - 20 h - 24 ${ currentScreen === Screen.NEWS ? 'text-aftral-red' : 'text-gray-600' } active: scale - 95 transition - all`}
+          className={`flex flex-col items-center justify-center w-20 h-24 ${ currentScreen === Screen.NEWS ? 'text-aftral-red' : 'text-gray-600' } active:scale-95 transition-all`}
         >
           <Megaphone size={32} />
           <span className="text-xs font-bold uppercase mt-1">Actus</span>
@@ -83,7 +83,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
         <button
           onClick={() => navigate(Screen.EVENTS)}
-          className={`flex flex - col items - center justify - center w - 20 h - 24 ${ currentScreen === Screen.EVENTS ? 'text-aftral-red' : 'text-gray-600' } active: scale - 95 transition - all`}
+          className={`flex flex-col items-center justify-center w-20 h-24 ${ currentScreen === Screen.EVENTS ? 'text-aftral-red' : 'text-gray-600' } active:scale-95 transition-all`}
         >
           <Calendar size={32} />
           <span className="text-xs font-bold uppercase mt-1">Agenda</span>
