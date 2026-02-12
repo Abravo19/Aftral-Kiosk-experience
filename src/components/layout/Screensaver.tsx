@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { MousePointerClick, Megaphone, MapPin, GraduationCap, Truck } from 'lucide-react';
-import { newsItems } from '../data';
+import { useData } from '../../context/DataContext';
 
 interface ScreensaverProps {
   onWake: () => void;
@@ -17,6 +17,7 @@ interface SlideData {
 
 export const Screensaver: React.FC<ScreensaverProps> = ({ onWake }) => {
   const [activeSlide, setActiveSlide] = useState(0);
+  const { data } = useData();
 
   // Memoize slides to prevent recreation on every render
   const slides: SlideData[] = useMemo(() => {
@@ -54,16 +55,18 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ onWake }) => {
       }
     ];
 
-    const promoSlides: SlideData[] = newsItems
-        .filter(n => n.priority === 1)
-        .map(n => ({
-            id: n.id,
-            type: n.type,
-            title: n.title,
-            subtitle: n.summary,
-            img: n.image || "https://picsum.photos/seed/generic/1080/1920",
-            Icon: n.type === 'PROMOTION' ? Megaphone : undefined
-        }));
+    const promoSlides: SlideData[] = data?.newsItems
+        ? data.newsItems
+            .filter(n => n.priority === 1)
+            .map(n => ({
+                id: n.id,
+                type: n.type,
+                title: n.title,
+                subtitle: n.summary,
+                img: n.image || "https://picsum.photos/seed/generic/1080/1920",
+                Icon: n.type === 'PROMOTION' ? Megaphone : undefined
+            }))
+        : [];
 
     return [
         staticSlides[0], 
@@ -72,7 +75,7 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ onWake }) => {
         staticSlides[2], 
         staticSlides[3]  
     ];
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     if (slides.length === 0) return;
