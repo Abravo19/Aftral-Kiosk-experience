@@ -1,4 +1,3 @@
-```typescript
 import React from 'react';
 import { Home, ArrowLeft, MapPin, Calendar, BookOpen, Phone, Megaphone } from 'lucide-react';
 import { Screen } from '../../types/types';
