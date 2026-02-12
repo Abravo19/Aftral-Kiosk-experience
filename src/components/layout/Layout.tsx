@@ -1,8 +1,9 @@
-import React from 'react';
-import { Home, ArrowLeft, MapPin, Calendar, BookOpen, Phone, Megaphone, User } from 'lucide-react';
+import React, { useState } from 'react';
+import { Home, ArrowLeft, MapPin, Calendar, BookOpen, Phone, Megaphone, User, Mail } from 'lucide-react';
 import { Screen } from '../../types/types';
 import { useNavigation } from '../../context/NavigationContext';
 import { useUser } from '../../context/UserContext';
+import { EmailModal } from '../common/EmailModal';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { currentScreen, navigate, goBack, resetNavigation } = useNavigation();
   const { setUserProfile, userProfile } = useUser();
+  const [showEmailModal, setShowEmailModal] = useState(false);
 
   const handleReset = () => {
     resetNavigation();
@@ -88,16 +90,26 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
 
         {/* Call to Action - Right Side */}
-        <div className="w-32 flex justify-center">
+        <div className="w-48 flex justify-center gap-3">
+             <button
+                onClick={() => setShowEmailModal(true)}
+                className="flex flex-col items-center justify-center w-20 h-28 rounded-2xl bg-white text-aftral-red border-2 border-aftral-red active:bg-red-50 active:scale-95 transition-all shadow-sm"
+            >
+                <Mail size={32} />
+                <span className="text-[10px] font-bold uppercase mt-2 text-center leading-tight px-1">Recevoir<br/>Infos</span>
+            </button>
             <button
                 onClick={() => navigate(Screen.CONTACT)}
-                className="flex flex-col items-center justify-center w-28 h-28 rounded-2xl bg-aftral-dark text-white active:bg-black active:scale-95 transition-all shadow-lg"
+                className="flex flex-col items-center justify-center w-24 h-28 rounded-2xl bg-aftral-dark text-white active:bg-black active:scale-95 transition-all shadow-lg"
             >
                 <Phone size={36} />
                 <span className="text-sm font-bold uppercase mt-2">Contact</span>
             </button>
         </div>
       </nav>
+      
+      {/* Global Modals */}
+      <EmailModal isOpen={showEmailModal} onClose={() => setShowEmailModal(false)} />
     </div>
   );
 };
