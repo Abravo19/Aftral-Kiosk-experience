@@ -18,6 +18,12 @@ interface SlideData {
 export const Screensaver: React.FC<ScreensaverProps> = ({ onWake }) => {
   const [activeSlide, setActiveSlide] = useState(0);
   const { data } = useData();
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   // Memoize slides to prevent recreation on every render
   const slides: SlideData[] = useMemo(() => {
@@ -109,6 +115,16 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ onWake }) => {
                     
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-90"></div>
+
+                    {/* Clock & Date Widget */}
+                    <div className="absolute top-12 right-12 z-30 text-right">
+                        <div className="text-8xl font-bold font-mono tracking-widest drop-shadow-2xl">
+                            {time.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                        </div>
+                        <div className="text-3xl text-gray-300 font-light mt-2 uppercase tracking-wide">
+                            {time.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+                        </div>
+                    </div>
 
                     {/* Content Zone */}
                     <div className="absolute inset-0 z-20 flex flex-col items-center justify-end pb-32 px-12 text-center">

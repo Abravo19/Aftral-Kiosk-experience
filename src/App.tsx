@@ -9,6 +9,7 @@ import { Contact } from './screens/Contact';
 import { JobSheets } from './screens/JobSheets';
 import { NewsScreen } from './screens/News';
 import { Screen, UserProfile } from './types/types';
+import { Screensaver } from './components/layout/Screensaver';
 
 import { NavigationProvider, useNavigation } from './context/NavigationContext';
 import { UserProvider, useUser } from './context/UserContext';
@@ -19,6 +20,7 @@ import { useIdleTimer } from './hooks/useIdleTimer';
 import { DataProvider, useData } from './context/DataContext';
 
 const AppContent: React.FC = () => {
+  const [isScreensaverActive, setIsScreensaverActive] = useState(false);
   const { currentScreen, navigate, resetNavigation } = useNavigation();
   const { userProfile, setUserProfile } = useUser();
   const { loading, error } = useData();
@@ -26,6 +28,7 @@ const AppContent: React.FC = () => {
   useIdleTimer(90000, () => {
     resetNavigation();
     setUserProfile(null);
+    setIsScreensaverActive(true);
   });
 
   if (loading) {
@@ -69,6 +72,19 @@ const AppContent: React.FC = () => {
 
   return (
     <Layout>
+      <AnimatePresence mode='wait'>
+        {isScreensaverActive && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100]"
+          >
+            <Screensaver onWake={() => setIsScreensaverActive(false)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence mode='wait'>
         <motion.div
           key={currentScreen}
