@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
 import { UserProfile, Screen } from '../types/types';
-import { GraduationCap, Users, Briefcase, Building2, Lightbulb, FileText, ChevronRight, Megaphone } from 'lucide-react';
+import { GraduationCap, Users, Briefcase, Building2, Lightbulb, FileText, ChevronRight, Megaphone, ArrowRight } from 'lucide-react';
 import { useData } from '../context/DataContext';
 import { useNavigation } from '../context/NavigationContext';
 import { useUser } from '../context/UserContext';
+import { motion } from 'framer-motion';
 
 export const Home: React.FC = () => {
   const { navigate } = useNavigation();
@@ -16,66 +17,66 @@ export const Home: React.FC = () => {
   };
 
   const profiles = [
-    { type: UserProfile.STUDENT, icon: GraduationCap, color: 'bg-blue-600', desc: "Je cherche une formation ou une alternance" },
-    { type: UserProfile.PARENT, icon: Users, color: 'bg-teal-600', desc: "Je m'informe pour l'avenir de mon enfant" },
-    { type: UserProfile.EMPLOYEE, icon: Briefcase, color: 'bg-orange-600', desc: "Je veux évoluer ou me reconvertir" },
-    { type: UserProfile.COMPANY, icon: Building2, color: 'bg-slate-700', desc: "Je souhaite former mes équipes ou recruter" },
+    { type: UserProfile.STUDENT, icon: GraduationCap, color: 'bg-blue-600', label: "Étudiant / Alternant", desc: "Je cherche une formation" },
+    { type: UserProfile.PARENT, icon: Users, color: 'bg-teal-600', label: "Parent", desc: "Pour l'avenir de mon enfant" },
+    { type: UserProfile.EMPLOYEE, icon: Briefcase, color: 'bg-orange-600', label: "Salarié / Reconversion", desc: "Je veux évoluer" },
+    { type: UserProfile.COMPANY, icon: Building2, color: 'bg-slate-700', label: "Entreprise", desc: "Former mes équipes" },
   ];
 
-  // Get the highest priority news item
   const featuredNews = useMemo(() => {
       if (!data) return undefined;
       return data.newsItems.find(n => n.priority === 1)
   }, [data]);
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="mb-6">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">Bienvenue chez AFTRAL</h1>
-        <p className="text-xl text-gray-600">Pour mieux vous guider, dites-nous qui vous êtes :</p>
+    <div className="h-full flex flex-col gap-8">
+      
+      {/* Welcome Header */}
+      <div className="text-center py-6">
+        <h1 className="text-kiosk-xl font-bold text-aftral-dark leading-tight mb-2">
+          Bienvenue chez <span className="text-aftral-red">AFTRAL</span>
+        </h1>
+        <p className="text-kiosk-base text-gray-500 max-w-2xl mx-auto">
+          Touchez votre profil pour commencer l'expérience
+        </p>
       </div>
 
-      {/* Profiles Grid */}
-      <div className="grid grid-cols-1 gap-3 mb-4">
-        {profiles.map((p) => (
-          <button
-            key={p.type}
-            onClick={() => handleSelectProfile(p.type)}
-            className="group relative overflow-hidden rounded-xl shadow-sm hover:shadow-md active:scale-95 transition-all duration-300 text-left bg-white border-l-8"
-            style={{ borderLeftColor: p.color.replace('bg-', '') }}
+      {/* Main Kiosk Grid - Profile Selection */}
+      <div className="grid grid-cols-2 gap-6 flex-1 px-4">
+        {profiles.map((profile, index) => (
+          <motion.button
+            key={profile.type}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+            onClick={() => handleSelectProfile(profile.type)}
+            className="relative overflow-hidden bg-white rounded-3xl shadow-kiosk border border-gray-100 p-8 text-left flex flex-col justify-between group active:scale-95 transition-all duration-300"
           >
-            <div className={`absolute inset-0 opacity-0 group-hover:opacity-5 ${p.color} transition-opacity`}></div>
-            <div className="p-5 flex items-center gap-5">
-              <div className={`w-14 h-14 rounded-full ${p.color} flex items-center justify-center text-white shrink-0`}>
-                <p.icon size={28} />
-              </div>
-              <div>
-                <h2 className="text-lg font-bold text-gray-800 mb-0.5">{p.type}</h2>
-                <p className="text-gray-500 text-sm">{p.desc}</p>
-              </div>
-              <div className="ml-auto">
-                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors">
-                  <ChevronRight className="w-5 h-5 text-gray-600" />
-                </div>
-              </div>
+            {/* Color Accent Bar */}
+            <div className={`absolute top-0 left-0 w-full h-3 ${profile.color}`} />
+
+            <div className={`w-20 h-20 rounded-2xl ${profile.color} flex items-center justify-center text-white mb-6 shadow-md`}>
+              <profile.icon size={48} />
             </div>
-          </button>
+
+            <div>
+              <h3 className="text-kiosk-lg font-bold text-gray-900 mb-2 group-hover:text-aftral-red transition-colors">
+                {profile.label}
+              </h3>
+              <p className="text-kiosk-xs text-gray-500 leading-snug">
+                {profile.desc}
+              </p>
+            </div>
+            
+            <div className="absolute bottom-8 right-8 text-gray-300 group-hover:text-aftral-red transition-colors">
+              <ArrowRight size={40} />
+            </div>
+          </motion.button>
         ))}
       </div>
 
-      {/* Embedded News Teaser */}
+      {/* Featured News Teaser - Bottom Card */}
       {featuredNews && (
-        <button
-          onClick={() => navigate(Screen.NEWS)}
-          className="mb-4 w-full bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl p-4 shadow-md active:scale-95 transition-all flex items-center gap-4 text-left group border border-gray-700"
-        >
-          <div className="relative w-16 h-16 shrink-0 rounded-lg overflow-hidden bg-gray-700">
-            {featuredNews.image && <img src={featuredNews.image} className="w-full h-full object-cover opacity-80" alt="" />}
-            <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-              <Megaphone className="text-white" size={24} />
-            </div>
-          </div>
-          <div className="flex-1">
             <span className="text-aftral-red text-xs font-bold uppercase tracking-wider mb-1 block">
               {featuredNews.type === 'PROMOTION' ? 'Offre Spéciale' : 'À la une'}
             </span>
