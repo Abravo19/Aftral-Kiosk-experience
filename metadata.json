@@ -1,0 +1,5 @@
+{
+  "name": "AFTRAL Kiosk Experience",
+  "description": "A vertical interactive kiosk application for AFTRAL training centers featuring profile-based navigation, training catalog, and orientation tools.",
+  "requestFramePermissions": []
+}

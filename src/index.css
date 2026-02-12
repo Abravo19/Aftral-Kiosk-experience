@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Virtual Keyboard Overrides */
+.hg-theme-default {
+    background-color: #f3f4f6;
+    padding: 10px;
+}
+.hg-button {
+    height: 50px !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.1);
+    color: #1f2937 !important;
+}
+.hg-button:active {
+    transform: translateY(2px);
+    box-shadow: none;
+}
+.hg-standardBtn {
+    background: white !important;
+}
+.hg-functionBtn {
+    background: #e5e7eb !important;
+}
+/* Focus ring for inputs */
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #E30613;
+    box-shadow: 0 0 0 2px rgba(227, 6, 19, 0.2);
+}

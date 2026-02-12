@@ -1,0 +1,109 @@
+{
+  "trainingCatalog": [
+    { "id": "1", "title": "CAP Conducteur Routier Marchandises", "level": "Niveau 3", "duration": "1 an", "type": "Alternance", "category": "Transport" },
+    { "id": "2", "title": "BTS Gestion des Transports et Logistique Associée", "level": "Bac +2", "duration": "2 ans", "type": "Alternance", "category": "Logistique" },
+    { "id": "3", "title": "Titre Pro Préparateur de Commandes", "level": "Niveau 3", "duration": "6 mois", "type": "Continu", "category": "Logistique" },
+    { "id": "4", "title": "Bac Pro Logistique", "level": "Bac", "duration": "3 ans", "type": "Initiale", "category": "Logistique" },
+    { "id": "5", "title": "Responsable Production Transport et Logistique", "level": "Bac +3", "duration": "1 an", "type": "Alternance", "category": "Transport" },
+    { "id": "6", "title": "Directeur de la Supply Chain", "level": "Bac +5", "duration": "2 ans", "type": "Alternance", "category": "Logistique" },
+    { "id": "7", "title": "Ambulancier Diplôme d’État", "level": "Niveau 3", "duration": "6 mois", "type": "Continu", "category": "Transport" }
+  ],
+  "events": [
+    { "id": "1", "title": "Portes Ouvertes - Campus Paris", "date": "12 Octobre 2024", "location": "Paris 10e", "type": "JPO" },
+    { "id": "2", "title": "Job Dating Logistique", "date": "25 Octobre 2024", "location": "Lyon", "type": "Job Dating" },
+    { "id": "3", "title": "Webinaire: Devenir Conducteur", "date": "02 Novembre 2024", "location": "En ligne", "type": "Information" },
+    { "id": "4", "title": "Salon de l’Étudiant", "date": "15 Novembre 2024", "location": "Bordeaux", "type": "JPO" }
+  ],
+  "quizQuestions": [
+    { "id": 1, "question": "Qu'est-ce qui vous attire le plus ?", "options": ["Conduire et voyager", "Organiser et planifier", "Gérer une équipe", "La mécanique et la technique"] },
+    { "id": 2, "question": "Quel environnement de travail préférez-vous ?", "options": ["En extérieur / Sur la route", "Dans un entrepôt dynamique", "Dans un bureau", "Un mix des deux"] },
+    { "id": 3, "question": "Comment aimez-vous apprendre ?", "options": ["Par la pratique (Alternance)", "En salle de cours classique", "En autonomie", "Stages intensifs"] }
+  ],
+  "jobProfiles": [
+    {
+      "id": "1",
+      "title": "Conducteur Routier",
+      "category": "Transport",
+      "description": "Le maillon indispensable de la chaîne logistique pour acheminer les marchandises à bon port.",
+      "missions": ["Conduire un véhicule lourd (SPL)", "Superviser le chargement/déchargement", "Veiller à l'entretien du véhicule", "Respecter les délais et la RSE"],
+      "skills": ["Autonomie", "Ponctualité", "Prudence", "Relationnel client"],
+      "trainingPaths": ["CAP Conducteur Routier", "Titre Pro Porteur", "Bac Pro Conducteur"]
+    },
+    {
+      "id": "2",
+      "title": "Préparateur de Commandes",
+      "category": "Logistique",
+      "description": "Au cœur de l'entrepôt, il assure la préparation des produits à expédier aux clients.",
+      "missions": ["Réceptionner les marchandises", "Préparer les commandes (picking)", "Emballer et étiqueter", "Utiliser des engins de manutention"],
+      "skills": ["Rigueur", "Organisation", "Esprit d'équipe", "Rapidité"],
+      "trainingPaths": ["Titre Pro Préparateur de commandes", "CAP Opérateur Logistique"]
+    },
+    {
+      "id": "3",
+      "title": "Responsable d'Exploitation",
+      "category": "Transport",
+      "description": "Il organise et supervise les opérations de transport au quotidien pour optimiser les flux.",
+      "missions": ["Gérer le planning des chauffeurs", "Optimiser les tournées", "Suivre la rentabilité", "Manager les équipes"],
+      "skills": ["Leadership", "Gestion du stress", "Réactivité", "Maîtrise de la réglementation"],
+      "trainingPaths": ["BTS Gestion des Transports", "Bachelor Transport", "Master Manager Transport"]
+    },
+    {
+      "id": "4",
+      "title": "Ambulancier",
+      "category": "Voyageurs",
+      "description": "Il assure le transport des patients et veille à leur confort et leur sécurité sanitaire.",
+      "missions": ["Transporter les patients", "Surveiller l'état de santé", "Entretenir le véhicule", "Effectuer les démarches administratives"],
+      "skills": ["Empathie", "Sang-froid", "Discrétion", "Endurance physique"],
+      "trainingPaths": ["Diplôme d'État d'Ambulancier", "Auxiliaire Ambulancier"]
+    },
+    {
+      "id": "5",
+      "title": "Directeur Supply Chain",
+      "category": "Logistique",
+      "description": "Il pilote l'ensemble des flux logistiques de l'entreprise, de l'approvisionnement à la distribution.",
+      "missions": ["Définir la stratégie logistique", "Négocier avec les prestataires", "Optimiser les coûts et délais", "Piloter les systèmes d'information"],
+      "skills": ["Vision stratégique", "Anglais courant", "Négociation", "Analyse de données"],
+      "trainingPaths": ["Master Supply Chain", "Titre Certifié Niv 7", "École d'Ingénieur"]
+    }
+  ],
+  "newsItems": [
+    {
+      "id": "1",
+      "type": "PROMOTION",
+      "title": "Permis Poids Lourd financé à 100%",
+      "summary": "Offre exceptionnelle pour les demandeurs d'emploi de moins de 26 ans.",
+      "body": "Profitez de notre dispositif spécial 'Objectif Transport' financé par la région. Cette offre couvre l'intégralité des frais pédagogiques pour le Titre Professionnel Conducteur Routier sur Porteur. Places limitées à 15 par session.",
+      "startDate": "2024-03-01",
+      "endDate": "2024-04-30",
+      "priority": 1,
+      "image": "/assets/images/promo1.svg",
+      "ctaLabel": "Voir les conditions",
+      "ctaTarget": "CONTACT"
+    },
+    {
+      "id": "2",
+      "type": "NEWS",
+      "title": "AFTRAL inaugure son simulateur de conduite",
+      "summary": "Une nouvelle technologie immersive pour former les conducteurs de demain.",
+      "body": "Le centre de formation de Monchy-Saint-Eloi s'équipe du tout dernier simulateur de conduite poids lourd. Cet outil permet de s'entraîner aux situations d'urgence et à l'éco-conduite en toute sécurité avant de prendre la route.",
+      "startDate": "2024-02-15",
+      "priority": 2,
+      "image": "/assets/images/news2.svg",
+      "ctaLabel": "Découvrir nos équipements",
+      "ctaTarget": "CATALOG"
+    },
+    {
+      "id": "3",
+      "type": "PROMOTION",
+      "title": "Rentrée décalée : il est encore temps !",
+      "summary": "Intégrez nos formations en alternance dès le mois de Mars.",
+      "body": "Vous n'avez pas trouvé votre formation en Septembre ? Pas de panique. AFTRAL ouvre une session spéciale pour le BTS GTLA et le Bac Pro Logistique. Trouvez votre entreprise avec notre service d'aide au placement.",
+      "startDate": "2024-02-01",
+      "endDate": "2024-03-15",
+      "priority": 1,
+      "image": "/assets/images/promo3.svg",
+      "ctaLabel": "S'inscrire maintenant",
+      "ctaTarget": "CONTACT"
+    }
+  ]
+}

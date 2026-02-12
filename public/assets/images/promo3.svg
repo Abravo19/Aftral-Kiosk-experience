@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" fill="#fff7ed"/>
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="#c2410c" font-weight="bold">Formation & Avenir</text>
+  <path d="M400 100 L250 180 L400 260 L550 180 Z" fill="#fed7aa" stroke="#f97316" stroke-width="4"/>
+  <path d="M550 180 V250" stroke="#f97316" stroke-width="4" fill="none"/>
+</svg>

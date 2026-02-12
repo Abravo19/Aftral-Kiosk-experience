@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" fill="#f0f9ff"/>
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="#0369a1" font-weight="bold">Innovation Logistique</text>
+  <rect x="250" y="150" width="100" height="100" fill="#bae6fd" stroke="#0ea5e9" stroke-width="4"/>
+  <rect x="380" y="120" width="100" height="130" fill="#7dd3fc" stroke="#0284c7" stroke-width="4"/>
+  <rect x="510" y="180" width="80" height="70" fill="#38bdf8" stroke="#0284c7" stroke-width="4"/>
+</svg>
