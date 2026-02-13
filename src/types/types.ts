@@ -13,7 +13,15 @@ export enum Screen {
   EVENTS = 'EVENTS',
   JOB_SHEETS = 'JOB_SHEETS',
   CONTACT = 'CONTACT',
-  NEWS = 'NEWS'
+  NEWS = 'NEWS',
+  ADMIN_DASHBOARD = 'ADMIN_DASHBOARD',
+  ADMIN_NEWS = 'ADMIN_NEWS',
+  ADMIN_SETTINGS = 'ADMIN_SETTINGS'
+}
+
+export interface AdminSettings {
+  pinCode: string;
+  screensaverTimeout: number; // milliseconds
 }
 
 export interface TrainingProgram {

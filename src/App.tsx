@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Layout } from './components/layout/Layout';
 import { Home } from './screens/Home';
 import { Catalog } from './screens/Catalog';
@@ -13,19 +13,29 @@ import { Screensaver } from './components/layout/Screensaver';
 
 import { NavigationProvider, useNavigation } from './context/NavigationContext';
 import { UserProvider, useUser } from './context/UserContext';
+import { AdminProvider, useAdmin } from './context/AdminContext';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { useIdleTimer } from './hooks/useIdleTimer';
 
 import { DataProvider, useData } from './context/DataContext';
 
+// Admin components
+import { AdminLayout } from './admin/AdminLayout';
+import { AdminDashboard } from './admin/AdminDashboard';
+import { AdminNews } from './admin/AdminNews';
+import { AdminSettings } from './admin/AdminSettings';
+
 const AppContent: React.FC = () => {
   const [isScreensaverActive, setIsScreensaverActive] = useState(false);
   const { currentScreen, navigate, resetNavigation } = useNavigation();
   const { userProfile, setUserProfile } = useUser();
-  const { loading, error } = useData();
+  const { loading, error, adminSettings } = useData();
+  const { isAdmin, logout } = useAdmin();
 
-  useIdleTimer(90000, () => {
+  useIdleTimer(adminSettings.screensaverTimeout, () => {
+    // Don't activate screensaver if in admin mode
+    if (isAdmin) return;
     resetNavigation();
     setUserProfile(null);
     setIsScreensaverActive(true);
@@ -47,6 +57,38 @@ const AppContent: React.FC = () => {
     );
   }
 
+  // Check if current screen is an admin screen
+  const isAdminScreen = [Screen.ADMIN_DASHBOARD, Screen.ADMIN_NEWS, Screen.ADMIN_SETTINGS].includes(currentScreen);
+
+  // If on admin screen but not authenticated, redirect to home
+  if (isAdminScreen && !isAdmin) {
+    resetNavigation();
+    return null;
+  }
+
+  // Render admin content
+  if (isAdminScreen && isAdmin) {
+    const renderAdminContent = () => {
+      switch (currentScreen) {
+        case Screen.ADMIN_DASHBOARD:
+          return <AdminDashboard />;
+        case Screen.ADMIN_NEWS:
+          return <AdminNews />;
+        case Screen.ADMIN_SETTINGS:
+          return <AdminSettings />;
+        default:
+          return <AdminDashboard />;
+      }
+    };
+
+    return (
+      <AdminLayout currentAdminScreen={currentScreen}>
+        {renderAdminContent()}
+      </AdminLayout>
+    );
+  }
+
+  // Public kiosk content
   const renderContent = () => {
     switch (currentScreen) {
       case Screen.HOME:
@@ -103,13 +145,15 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <UserProvider>
-      <NavigationProvider>
-        <DataProvider>
-          <AppContent />
-        </DataProvider>
-      </NavigationProvider>
-    </UserProvider>
+    <AdminProvider>
+      <UserProvider>
+        <NavigationProvider>
+          <DataProvider>
+            <AppContent />
+          </DataProvider>
+        </NavigationProvider>
+      </UserProvider>
+    </AdminProvider>
   );
 };
 
