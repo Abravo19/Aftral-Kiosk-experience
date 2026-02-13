@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Layout } from './components/layout/Layout';
 import { Home } from './screens/Home';
 import { Catalog } from './screens/Catalog';
@@ -8,12 +8,15 @@ import { Events } from './screens/Events';
 import { Contact } from './screens/Contact';
 import { JobSheets } from './screens/JobSheets';
 import { NewsScreen } from './screens/News';
-import { Screen, UserProfile } from './types/types';
+import { Screen } from './types/types';
 import { Screensaver } from './components/layout/Screensaver';
 
 import { NavigationProvider, useNavigation } from './context/NavigationContext';
 import { UserProvider, useUser } from './context/UserContext';
 import { AdminProvider, useAdmin } from './context/AdminContext';
+import { AnalyticsProvider, useAnalytics } from './context/AnalyticsContext';
+import { LanguageProvider } from './context/LanguageContext';
+import { AccessibilityProvider } from './context/AccessibilityContext';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { useIdleTimer } from './hooks/useIdleTimer';
@@ -26,15 +29,20 @@ import { AdminDashboard } from './admin/AdminDashboard';
 import { AdminNews } from './admin/AdminNews';
 import { AdminSettings } from './admin/AdminSettings';
 
-const AppContent: React.FC = () => {
+const AppContent = () => {
   const [isScreensaverActive, setIsScreensaverActive] = useState(false);
   const { currentScreen, navigate, resetNavigation } = useNavigation();
   const { userProfile, setUserProfile } = useUser();
   const { loading, error, adminSettings } = useData();
   const { isAdmin, logout } = useAdmin();
+  const { trackScreenView } = useAnalytics();
+
+  // Track screen views
+  useEffect(() => {
+    trackScreenView(currentScreen);
+  }, [currentScreen, trackScreenView]);
 
   useIdleTimer(adminSettings.screensaverTimeout, () => {
-    // Don't activate screensaver if in admin mode
     if (isAdmin) return;
     resetNavigation();
     setUserProfile(null);
@@ -57,27 +65,20 @@ const AppContent: React.FC = () => {
     );
   }
 
-  // Check if current screen is an admin screen
   const isAdminScreen = [Screen.ADMIN_DASHBOARD, Screen.ADMIN_NEWS, Screen.ADMIN_SETTINGS].includes(currentScreen);
 
-  // If on admin screen but not authenticated, redirect to home
   if (isAdminScreen && !isAdmin) {
     resetNavigation();
     return null;
   }
 
-  // Render admin content
   if (isAdminScreen && isAdmin) {
     const renderAdminContent = () => {
       switch (currentScreen) {
-        case Screen.ADMIN_DASHBOARD:
-          return <AdminDashboard />;
-        case Screen.ADMIN_NEWS:
-          return <AdminNews />;
-        case Screen.ADMIN_SETTINGS:
-          return <AdminSettings />;
-        default:
-          return <AdminDashboard />;
+        case Screen.ADMIN_DASHBOARD: return <AdminDashboard />;
+        case Screen.ADMIN_NEWS: return <AdminNews />;
+        case Screen.ADMIN_SETTINGS: return <AdminSettings />;
+        default: return <AdminDashboard />;
       }
     };
 
@@ -88,27 +89,17 @@ const AppContent: React.FC = () => {
     );
   }
 
-  // Public kiosk content
   const renderContent = () => {
     switch (currentScreen) {
-      case Screen.HOME:
-        return <Home />;
-      case Screen.CATALOG:
-        return <Catalog />;
-      case Screen.MAP:
-        return <MapScreen />;
-      case Screen.QUIZ:
-        return <Quiz />;
-      case Screen.EVENTS:
-        return <Events />;
-      case Screen.CONTACT:
-        return <Contact />;
-      case Screen.JOB_SHEETS:
-        return <JobSheets />;
-      case Screen.NEWS:
-        return <NewsScreen />;
-      default:
-        return <Home />;
+      case Screen.HOME: return <Home />;
+      case Screen.CATALOG: return <Catalog />;
+      case Screen.MAP: return <MapScreen />;
+      case Screen.QUIZ: return <Quiz />;
+      case Screen.EVENTS: return <Events />;
+      case Screen.CONTACT: return <Contact />;
+      case Screen.JOB_SHEETS: return <JobSheets />;
+      case Screen.NEWS: return <NewsScreen />;
+      default: return <Home />;
     }
   };
 
@@ -143,15 +134,21 @@ const AppContent: React.FC = () => {
   );
 };
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <AdminProvider>
       <UserProvider>
-        <NavigationProvider>
-          <DataProvider>
-            <AppContent />
-          </DataProvider>
-        </NavigationProvider>
+        <LanguageProvider>
+          <AccessibilityProvider>
+            <NavigationProvider>
+              <DataProvider>
+                <AnalyticsProvider>
+                  <AppContent />
+                </AnalyticsProvider>
+              </DataProvider>
+            </NavigationProvider>
+          </AccessibilityProvider>
+        </LanguageProvider>
       </UserProvider>
     </AdminProvider>
   );

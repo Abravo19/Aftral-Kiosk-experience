@@ -2,7 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Virtual Keyboard Overrides */
+/* ================================
+   Font Scaling (Accessibility)
+   ================================ */
+:root {
+    --font-scale: 1;
+}
+
+/* Apply font scaling to all text elements */
+body {
+    font-size: calc(1rem * var(--font-scale));
+}
+
+h1, h2, h3, h4, h5, h6, p, span, li, a, button, label, input, select, textarea {
+    font-size: inherit;
+}
+
+/* ================================
+   High Contrast Mode
+   ================================ */
+.high-contrast {
+    --tw-bg-opacity: 1;
+}
+
+.high-contrast body,
+.high-contrast .bg-aftral-gray {
+    background-color: #ffffff !important;
+}
+
+.high-contrast .bg-white {
+    background-color: #ffffff !important;
+    border: 2px solid #000000 !important;
+}
+
+.high-contrast .text-gray-400,
+.high-contrast .text-gray-500,
+.high-contrast .text-gray-600 {
+    color: #1a1a1a !important;
+}
+
+.high-contrast .text-gray-300 {
+    color: #333333 !important;
+}
+
+.high-contrast .border-gray-100,
+.high-contrast .border-gray-200 {
+    border-color: #000000 !important;
+}
+
+.high-contrast .shadow-sm,
+.high-contrast .shadow-md,
+.high-contrast .shadow-lg,
+.high-contrast .shadow-kiosk {
+    box-shadow: 0 0 0 2px #000000 !important;
+}
+
+.high-contrast button {
+    border: 2px solid currentColor !important;
+}
+
+.high-contrast .bg-gray-50,
+.high-contrast .bg-gray-100 {
+    background-color: #f0f0f0 !important;
+}
+
+/* ================================
+   Virtual Keyboard Overrides
+   ================================ */
 .hg-theme-default {
     background-color: #f3f4f6;
     padding: 10px;
@@ -25,9 +91,50 @@
 .hg-functionBtn {
     background: #e5e7eb !important;
 }
-/* Focus ring for inputs */
+
+/* ================================
+   Focus & Input Styles
+   ================================ */
 input:focus, select:focus, textarea:focus {
     outline: none;
     border-color: #E30613;
     box-shadow: 0 0 0 2px rgba(227, 6, 19, 0.2);
+}
+
+/* ================================
+   Screensaver Animations
+   ================================ */
+@keyframes progress {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+@keyframes pulse-ring {
+    0% { transform: scale(0.8); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 0; }
+    100% { transform: scale(0.8); opacity: 0; }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+    50% { box-shadow: 0 0 40px rgba(255,255,255,0.5), 0 0 80px rgba(227,6,19,0.3); }
+}
+
+.animate-pulse-ring {
+    animation: pulse-ring 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+/* ================================
+   Scrollbar Hide
+   ================================ */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
